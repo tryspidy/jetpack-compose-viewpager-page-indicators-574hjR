@@ -1,0 +1,28 @@
+val pagerState = rememberPagerState()
+
+TabRow(
+    // Our selected tab is our current page
+    selectedTabIndex = pagerState.currentPage,
+    // Override the indicator, using the provided pagerTabIndicatorOffset modifier
+    indicator = { tabPositions ->
+        TabRowDefaults.Indicator(
+            Modifier.pagerTabIndicatorOffset(pagerState, tabPositions)
+        )
+    }
+) {
+    // Add tabs for all of our pages
+    pages.forEachIndexed { index, title ->
+        Tab(
+            text = { Text(title) },
+            selected = pagerState.currentPage == index,
+            onClick = { /* TODO */ },
+        )
+    }
+}
+
+HorizontalPager(
+    count = pages.size,
+    state = pagerState,
+) { page ->
+    // TODO: page content
+}
